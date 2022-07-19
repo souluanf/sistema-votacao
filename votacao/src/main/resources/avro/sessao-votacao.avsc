@@ -1,0 +1,14 @@
+{
+    "type": "record",
+    "name": "SessaoVotacao",
+    "namespace": "dev.luanfernandes.votacao.domain.records",
+    "version": "1",
+    "fields": [
+        { "name": "pauta","type": "string"},
+        { "name": "sessao","type": "long"},
+        { "name": "horaInicio","type": "string"},
+        { "name": "horaFim","type": "string"},
+        { "name": "votoSim","type": "int"},
+        { "name": "votoNao","type": "int"}
+    ]
+}
