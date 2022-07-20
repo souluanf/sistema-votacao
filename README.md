@@ -63,9 +63,8 @@ mvn spring-boot:run
 
 #### Observações
 
-1. é preciso que as apps sejam subidas na ordem recomendada.
-2. envio da mensagem para o kafka acontece quando há a chamada para o endpoint '/{id}/resultado'.
-3. arquivo 'SessaoVotacao' é gerado pelo plugin do avro, através do arquivo 'src/main/resources/avro/sessao-votacao.avsc'
+1. envio da mensagem para o kafka acontece quando há a chamada para o endpoint '/{id}/resultado'.
+2. arquivo 'SessaoVotacao' é gerado pelo plugin do avro, através do arquivo 'src/main/resources/avro/sessao-votacao.avsc'
 
 
 #### Melhorias a serem implementadas
