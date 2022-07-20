@@ -2,7 +2,7 @@ package dev.luanfernandes.votacao.infrastructure.implementation;
 
 
 import dev.luanfernandes.votacao.domain.listener.event.VotacaoEncerradaEvent;
-import dev.luanfernandes.votacao.domain.records.SessaoVotacao;
+import dev.luanfernandes.votacao.domain.record$.SessaoVotacao;
 import dev.luanfernandes.votacao.domain.service.PublisherService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;

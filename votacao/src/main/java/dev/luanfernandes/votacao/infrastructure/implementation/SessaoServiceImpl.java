@@ -5,7 +5,7 @@ import dev.luanfernandes.votacao.api.exceptions.DateTimeException;
 import dev.luanfernandes.votacao.api.exceptions.NotFoundException;
 import dev.luanfernandes.votacao.domain.entity.ResultadoSessao;
 import dev.luanfernandes.votacao.domain.entity.Sessao;
-import dev.luanfernandes.votacao.domain.records.SessaoVotacao;
+import dev.luanfernandes.votacao.domain.record$.SessaoVotacao;
 import dev.luanfernandes.votacao.domain.service.PublisherService;
 import dev.luanfernandes.votacao.domain.service.SessaoService;
 import dev.luanfernandes.votacao.infrastructure.repository.SessaoRepository;
@@ -88,7 +88,6 @@ public class SessaoServiceImpl implements SessaoService {
 				.setVotoSim(resultadoSessao.getTotalSim())
 				.setVotoNao(resultadoSessao.getTotalNao())
 				.build();
-		log.info("AQUI");
 		publisherService.sessaoFinalizada(sessaoVotacao);
 	}
 }

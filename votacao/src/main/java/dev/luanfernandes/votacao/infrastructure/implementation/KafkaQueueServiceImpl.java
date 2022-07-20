@@ -4,7 +4,7 @@ import dev.luanfernandes.votacao.core.kafka.KafkaConfig;
 import dev.luanfernandes.votacao.core.kafka.TopicProperties;
 import dev.luanfernandes.votacao.domain.listener.KafkaQueueService;
 import dev.luanfernandes.votacao.domain.listener.event.VotacaoEncerradaEvent;
-import dev.luanfernandes.votacao.domain.records.SessaoVotacao;
+import dev.luanfernandes.votacao.domain.record$.SessaoVotacao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.EventListener;

@@ -1,7 +1,7 @@
 package dev.luanfernandes.votacao.core.kafka;
 
 
-import dev.luanfernandes.votacao.domain.records.SessaoVotacao;
+import dev.luanfernandes.votacao.domain.record$.SessaoVotacao;
 import lombok.Getter;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;

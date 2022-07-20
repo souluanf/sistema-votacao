@@ -1,7 +1,7 @@
 {
     "type": "record",
     "name": "SessaoVotacao",
-    "namespace": "dev.luanfernandes.votacao.domain.records",
+    "namespace": "dev.luanfernandes.votacao.domain.record",
     "version": "1",
     "fields": [
         { "name": "pauta","type": "string"},
