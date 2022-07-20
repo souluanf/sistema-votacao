@@ -1,7 +1,7 @@
 package dev.luanfernandes.consumer.service;
 
 
-import dev.luanfernandes.votacao.domain.records.SessaoVotacao;
+import dev.luanfernandes.consumer.record$.SessaoVotacao;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;

@@ -1,6 +1,7 @@
 package dev.luanfernandes.consumer.config;
 
-import dev.luanfernandes.votacao.domain.records.SessaoVotacao;
+
+import dev.luanfernandes.consumer.record$.SessaoVotacao;
 import lombok.Getter;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.context.annotation.Bean;
