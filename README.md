@@ -54,6 +54,18 @@ mvn clean package
 mvn spring-boot:run
 ```
 
+1. Aponte o browser para  [http://localhost:8080](http://localhost:8080) para ver a documentação.
+   - Aqui é possível ver a documentação e gerar requisições.
+2. Aponte para  [http://localhost:9021](http://localhost:9021) para utilizar o control center.
+   - Aqui é possível ver o tópico e enviar mensagens. A partir da primeira mensagem enviada já é possível ver o schema registrado no control center.
+
+
+
+#### Observações
+
+1. é preciso que as apps sejam subidas na ordem recomendada.
+2. envio da mensagem para o kafka acontece quando há a chamada para o endpoint '/{id}/resultado'.
+3. arquivo 'SessaoVotacao' é gerado pelo plugin do avro, através do arquivo 'src/main/resources/avro/sessao-votacao.avsc'
 
 
 #### Melhorias a serem implementadas
