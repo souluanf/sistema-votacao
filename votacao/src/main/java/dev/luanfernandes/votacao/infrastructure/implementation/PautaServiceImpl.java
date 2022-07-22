@@ -16,15 +16,13 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class PautaServiceImpl implements PautaService {
-
     private static final String PAUTA_INEXISTENTE = "Pauta inexistente";
-    private PautaRepository repository;
-
+    private final PautaRepository repository;
     @Override
     public Pauta criar(Pauta pauta) {
         var res = repository.findByNomeIgnoreCase(pauta.getNome());
         if (res.isPresent()){
-            throw new ConflictException("Pauta já cadstrada");
+            throw new ConflictException("Pauta já cadastrada");
         }
         return this.repository.save(pauta);
     }

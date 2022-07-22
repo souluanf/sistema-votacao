@@ -5,7 +5,6 @@ import dev.luanfernandes.votacao.api.exceptions.NotFoundException;
 import dev.luanfernandes.votacao.api.exceptions.ValidationException;
 import dev.luanfernandes.votacao.domain.entity.Associado;
 import dev.luanfernandes.votacao.domain.service.AssociadoService;
-import dev.luanfernandes.votacao.domain.service.UserInfoService;
 import dev.luanfernandes.votacao.domain.utils.DocumentValidator;
 import dev.luanfernandes.votacao.domain.utils.StringUtil;
 import dev.luanfernandes.votacao.infrastructure.repository.AssociadoRepository;
@@ -19,7 +18,6 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class AssociadoServiceImpl implements AssociadoService {
-	private UserInfoService userInfoService;
 	private AssociadoRepository repository;
 
 	@Override

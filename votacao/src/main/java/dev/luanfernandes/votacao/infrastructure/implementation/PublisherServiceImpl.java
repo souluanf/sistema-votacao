@@ -11,14 +11,10 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 public class PublisherServiceImpl implements PublisherService {
-
     private final ApplicationEventPublisher eventPublisher;
-
     public PublisherServiceImpl(ApplicationEventPublisher eventPublisher) {
         this.eventPublisher = eventPublisher;
     }
-
-
     @Override
     public void sessaoFinalizada(SessaoVotacao sessaoVotacao) {
         eventPublisher.publishEvent(new VotacaoEncerradaEvent(sessaoVotacao));

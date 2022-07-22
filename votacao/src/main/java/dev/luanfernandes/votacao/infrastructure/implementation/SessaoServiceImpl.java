@@ -23,11 +23,9 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class SessaoServiceImpl implements SessaoService {
-
 	private SessaoRepository sessaoRepository;
 	private PautaServiceImpl pautaServiceImpl;
 	private PublisherService publisherService;
-
 	@Override
 	public Sessao abrir(Sessao sessao) throws DateTimeException, NotFoundException {
 		if (!this.pautaServiceImpl.verificaExistePautaPorId(sessao.getPauta().getId())) {
@@ -43,23 +41,19 @@ public class SessaoServiceImpl implements SessaoService {
 		}
 		return this.sessaoRepository.save(sessao);
 	}
-
 	@Override
 	public boolean verificaSessaoComDataHoraMaiorIgualAtual(Sessao sessao) {
 		return sessao.getDataHoraInicio().isBefore(OffsetDateTime.now());
 	}
-
 	@Override
 	public boolean verificaSessaoComDiferencaMinimaUmMinuto(Sessao sessao) {
 		return sessao.getDataHoraFechamento().isBefore(sessao.getDataHoraInicio())
 				|| Duration.between(sessao.getDataHoraInicio(), sessao.getDataHoraFechamento()).toMinutes() >= 1;
 	}
-
 	@Override
 	public Sessao obterPorId(Long id) throws NotFoundException {
 		return this.sessaoRepository.findById(id).orElseThrow(() -> new NotFoundException("Sessão inexistente"));
 	}
-
 	@Override
 	public List<Sessao> obterTodos() {
 		return this.sessaoRepository.findAll();
@@ -76,7 +70,6 @@ public class SessaoServiceImpl implements SessaoService {
 		notificar(resultadoSessao,sessao);
 		return resultadoSessao;
 	}
-
 	public void notificar(ResultadoSessao resultadoSessao, Sessao sessao){
 		var sessaoVotacao = SessaoVotacao.newBuilder()
 				.setPauta(sessao.getPauta().getNome())

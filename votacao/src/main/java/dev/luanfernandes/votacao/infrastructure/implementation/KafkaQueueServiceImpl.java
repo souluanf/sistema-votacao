@@ -17,21 +17,16 @@ import org.springframework.stereotype.Service;
 public class KafkaQueueServiceImpl implements KafkaQueueService {
     private final TopicProperties topicProperties;
     private final KafkaConfig kafkaConfig;
-
     public KafkaQueueServiceImpl(TopicProperties topicProperties, KafkaConfig kafkaConfig) {
         this.topicProperties = topicProperties;
         this.kafkaConfig = kafkaConfig;
     }
-
     @EventListener
     @Override
     public void votacaoEncerradaListener(VotacaoEncerradaEvent event) {
         log.info("Votação: {}.", event.getSessaoVotacao());
         send(event.getSessaoVotacao());
     }
-
-
-
     @Override
     public void send(SessaoVotacao sessaoVotacao) {
         kafkaConfig.kafkaTemplate().send(topicProperties.getName(),sessaoVotacao);

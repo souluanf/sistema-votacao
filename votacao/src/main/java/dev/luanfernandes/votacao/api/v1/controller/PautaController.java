@@ -16,26 +16,21 @@ import java.util.List;
 @RequestMapping(value = "/v1/pautas")
 @Slf4j
 public class PautaController implements PautaControllerOpenApi {
-
 	public final PautaServiceImpl pautaServiceImpl;
-
 	public PautaController(PautaServiceImpl pautaServiceImpl) {
 		this.pautaServiceImpl = pautaServiceImpl;
 	}
-
 	@Override
 	@PostMapping
 	public PautaDTO criar(@Valid @RequestBody PautaDTO pauta) {
 		Pauta pautaSalvo = this.pautaServiceImpl.criar(PautaDTO.toPauta(pauta));
 		return PautaDTO.from(pautaSalvo);
 	}
-
 	@Override
 	@GetMapping(value = "/{id}")
 	public PautaDTO obterPorId(@PathVariable("id") Long id){
 		return PautaDTO.from(this.pautaServiceImpl.obterPorId(id));
 	}
-
 	@Override
 	@GetMapping
 	public List<PautaDTO> obterTodos() {

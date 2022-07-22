@@ -20,11 +20,9 @@ import java.util.Collections;
 @Slf4j
 public class UserInfoServiceImpl implements UserInfoService {
     private final RestTemplate restTemplate;
-
     public UserInfoServiceImpl(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
-
     @Override
     public void enableToVote(String cpf) {
         if (!DocumentValidator.isValidCpf(StringUtil.removeMask(cpf))){
