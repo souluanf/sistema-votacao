@@ -21,65 +21,63 @@ import java.time.Instant;
 @ControllerAdvice
 public class ResourceExceptionHandler extends ResponseEntityExceptionHandler {
 
+    private static final String NOT_FOUND = "Not found";
+    private static final String BAD_REQUEST = "Bad request";
+    private static final String CONFLICT = "Conflict";
+    private static final String UNEXPECTED_ERROR = "Unexpected error";
+    private static final String NULL_POINTER = "Null Pointer";
+    private static final String DATABASE_ERROR = "Database error";
+
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<StandardError> notFoundException(HttpServletRequest req, NotFoundException e) {
         return buildResponseEntity(new StandardError(Instant.now(), HttpStatus.NOT_FOUND.value(),
-                "Not found:", e.getMessage(), req.getRequestURI()));
+                NOT_FOUND, e.getMessage(), req.getRequestURI()));
     }
-
-
     @ExceptionHandler(ExternalApiException.class)
     public ResponseEntity<StandardError> externalApiException(HttpServletRequest req, ExternalApiException e) {
         return buildResponseEntity(new StandardError(Instant.now(), HttpStatus.BAD_REQUEST.value(),
-                "Bad request", e.getMessage(), req.getRequestURI()));
+                BAD_REQUEST, e.getMessage(), req.getRequestURI()));
     }
-
     @ExceptionHandler(ValidationException.class)
     public ResponseEntity<StandardError> validationException(HttpServletRequest req, ValidationException e) {
         return buildResponseEntity(new StandardError(Instant.now(), HttpStatus.BAD_REQUEST.value(),
-                "Bad request", e.getMessage(), req.getRequestURI()));
+                BAD_REQUEST, e.getMessage(), req.getRequestURI()));
     }
-
-
     @ExceptionHandler(ConflictException.class)
     public ResponseEntity<StandardError> conflictException(HttpServletRequest req, ConflictException e) {
         return buildResponseEntity(new StandardError(Instant.now(), HttpStatus.CONFLICT.value(),
-                "Conflict", e.getMessage(), req.getRequestURI()));
+                CONFLICT, e.getMessage(), req.getRequestURI()));
     }
-
-    @ExceptionHandler(ServerException.class)
-    public ResponseEntity<StandardError> serverException(HttpServletRequest req, ServerException e) {
-        return buildResponseEntity(new StandardError(Instant.now(), HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), e.getMessage(), req.getRequestURI()));
-    }
-
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<StandardError> handleEntityNotFound(HttpServletRequest req, EntityNotFoundException e) {
         return buildResponseEntity(new StandardError(Instant.now(), HttpStatus.NOT_FOUND.value(),
-                "Resource not found", e.getMessage(), req.getRequestURI()));
+                NOT_FOUND, e.getMessage(), req.getRequestURI()));
     }
-
     @ExceptionHandler(NullPointerException.class)
     public ResponseEntity<StandardError> nullPointerException(HttpServletRequest req, NullPointerException e) {
         return buildResponseEntity(new StandardError(Instant.now(), HttpStatus.BAD_REQUEST.value(),
-                "Resource Null Pointer", e.getMessage(), req.getRequestURI()));
+                NULL_POINTER, e.getMessage(), req.getRequestURI()));
     }
-
 
     @ExceptionHandler(DataIntegrityViolationException.class)
     protected ResponseEntity<StandardError> handleDataIntegrityViolation(DataIntegrityViolationException e, HttpServletRequest req) {
         if (e.getCause() == null) {
             return buildResponseEntity(new StandardError(Instant.now(), HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                    "Unexpected error", e.getMessage(), req.getRequestURI()));
+                    UNEXPECTED_ERROR, e.getMessage(), req.getRequestURI()));
         }
         return buildResponseEntity(new StandardError(Instant.now(), HttpStatus.CONFLICT.value(),
-                "Database error", e.getMessage(), req.getRequestURI()));
+                DATABASE_ERROR, e.getMessage(), req.getRequestURI()));
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<StandardError> defaultErrorHandler(HttpServletRequest req, Exception e) {
         return buildResponseEntity(new StandardError(Instant.now(), HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                "Unexpected error", e.getMessage(), req.getRequestURI()));
+                UNEXPECTED_ERROR, e.getMessage(), req.getRequestURI()));
+    }
+    @ExceptionHandler(ServerException.class)
+    public ResponseEntity<StandardError> serverException(HttpServletRequest req, ServerException e) {
+        return buildResponseEntity(new StandardError(Instant.now(), HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), e.getMessage(), req.getRequestURI()));
     }
 
     private ResponseEntity<StandardError> buildResponseEntity(StandardError error) {

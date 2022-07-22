@@ -3,6 +3,7 @@ package dev.luanfernandes.votacao.infrastructure.implementation;
 import dev.luanfernandes.votacao.api.exceptions.ConflictException;
 import dev.luanfernandes.votacao.api.exceptions.DateTimeException;
 import dev.luanfernandes.votacao.api.exceptions.NotFoundException;
+import dev.luanfernandes.votacao.api.exceptions.SessaoException;
 import dev.luanfernandes.votacao.domain.entity.Associado;
 import dev.luanfernandes.votacao.domain.entity.Sessao;
 import dev.luanfernandes.votacao.domain.entity.Voto;
@@ -98,7 +99,7 @@ class VotoServiceImplTest {
         doReturn(voto.getSessao()).when(this.sessaoServiceImpl).obterPorId(Mockito.anyLong());
         doReturn(Optional.of(voto.getAssociado())).when(this.associadoServiceImpl).obterPorCPF(Mockito.anyString());
         doReturn(true).when(this.userService).consultaCpf(Mockito.anyString());
-        assertThrows(DateTimeException.class,
+        assertThrows(SessaoException.class,
                 () -> this.votoServiceImpl.votar(voto.getSessao().getId(), voto.getAssociado().getCpf(), voto.getValor()),
                 "Sessão não está aberta");
     }

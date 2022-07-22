@@ -1,8 +1,8 @@
 package dev.luanfernandes.votacao.infrastructure.implementation;
 
 import dev.luanfernandes.votacao.api.exceptions.ConflictException;
-import dev.luanfernandes.votacao.api.exceptions.DateTimeException;
 import dev.luanfernandes.votacao.api.exceptions.NotFoundException;
+import dev.luanfernandes.votacao.api.exceptions.SessaoException;
 import dev.luanfernandes.votacao.domain.entity.Associado;
 import dev.luanfernandes.votacao.domain.entity.Sessao;
 import dev.luanfernandes.votacao.domain.entity.Voto;
@@ -25,10 +25,10 @@ public class VotoServiceImpl implements VotoService {
 	private UserService userService;
 
 	@Override
-	public Voto votar(Long idSessao, String cpf, Boolean valor) throws NotFoundException, DateTimeException, ConflictException{
+	public Voto votar(Long idSessao, String cpf, Boolean valor){
 		Sessao sessao = this.sessaoServiceImpl.obterPorId(idSessao);
 		if (!sessao.isAberta()) {
-			throw new DateTimeException("Sessão não está aberta");
+			throw new SessaoException("Sessão não está aberta");
 		}
 		cpf = removeMask(cpf);
 		Associado associado = this.associadoServiceImpl.obterPorCPF(cpf).orElseThrow(() -> new NotFoundException("Associado inexistente"));
