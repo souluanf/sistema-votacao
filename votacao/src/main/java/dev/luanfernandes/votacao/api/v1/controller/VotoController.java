@@ -13,7 +13,7 @@ import java.util.Map;
 
 
 @RestController
-@RequestMapping(value = "/votos")
+@RequestMapping(value = "/v1/votos")
 @Slf4j
 public class VotoController implements VotoControllerOpenApi {
 	private final VotoServiceImpl votoServiceImpl;

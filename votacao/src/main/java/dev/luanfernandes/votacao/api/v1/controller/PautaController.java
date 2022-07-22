@@ -13,7 +13,7 @@ import java.util.List;
 
 @Api(tags = "Pauta")
 @RestController
-@RequestMapping(value = "/pautas")
+@RequestMapping(value = "/v1/pautas")
 @Slf4j
 public class PautaController implements PautaControllerOpenApi {
 

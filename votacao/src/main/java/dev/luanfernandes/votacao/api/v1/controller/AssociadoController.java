@@ -12,7 +12,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(value = "/associados")
+@RequestMapping(value = "/v1/associados")
 @Slf4j
 public class AssociadoController implements AssociadoControllerOpenApi {
 

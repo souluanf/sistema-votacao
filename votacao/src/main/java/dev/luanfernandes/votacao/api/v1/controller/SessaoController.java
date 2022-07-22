@@ -17,7 +17,7 @@ import java.util.List;
 
 @Api(tags = "Sessão")
 @RestController
-@RequestMapping(value = "/sessoes")
+@RequestMapping(value = "/v1/sessoes")
 @Slf4j
 public class SessaoController implements SessaoControllerOpenApi {
 
