@@ -9,6 +9,7 @@
         { "name": "horaInicio","type": "string"},
         { "name": "horaFim","type": "string"},
         { "name": "votoSim","type": "int"},
-        { "name": "votoNao","type": "int"}
+        { "name": "votoNao","type": "int"},
+        { "name": "aberta","type": "boolean"}
     ]
 }
