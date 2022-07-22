@@ -55,7 +55,7 @@ class AssociadoControllerTest {
     void verificaObterAssociado() throws Exception {
         Associado associadoEsperado = criaAssociado();
         when(this.associadoServiceImpl.obterPorId(Mockito.anyLong())).thenReturn(associadoEsperado);
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/associados/" + 1)
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/v1/associados/" + 1)
                         .accept(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json(JsonUtil.toJson(AssociadoDTO.from(associadoEsperado))));
@@ -65,7 +65,7 @@ class AssociadoControllerTest {
     @DisplayName("Verifica NotFoundException obter associado")
     void verificaNotFoundExceptionObterAssociado() throws Exception {
         when(this.associadoServiceImpl.obterPorId(Mockito.anyLong())).thenThrow(new NotFoundException(""));
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/associados/" + 1)
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/v1/associados/" + 1)
                         .accept(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isNotFound());
     }
@@ -78,7 +78,7 @@ class AssociadoControllerTest {
         List<Associado> listaEsperada = asList(associado1, associado2);
         when(this.associadoServiceImpl.obterTodos())
                 .thenReturn(listaEsperada);
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/associados")
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/v1/associados")
                         .accept(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json(

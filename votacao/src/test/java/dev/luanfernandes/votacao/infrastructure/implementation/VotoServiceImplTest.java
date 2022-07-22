@@ -80,7 +80,6 @@ class VotoServiceImplTest {
         doReturn(true).when(this.sessao).isAberta();
         doReturn(voto.getSessao()).when(this.sessaoServiceImpl).obterPorId(Mockito.anyLong());
         doReturn(Optional.of(voto.getAssociado())).when(this.associadoServiceImpl).obterPorCPF(Mockito.anyString());
-        doReturn(true).when(this.userService).consultaCpf(Mockito.anyString());
         doReturn(false).when(this.votoRepository).existsVotoByIdSessaoAndIdAssociado(Mockito.anyLong(),
                 Mockito.anyLong());
         doReturn(SerializationUtils.clone(voto)).when(this.votoRepository).save(Mockito.any(Voto.class));
@@ -98,7 +97,6 @@ class VotoServiceImplTest {
         doReturn(false).when(this.sessao).isAberta();
         doReturn(voto.getSessao()).when(this.sessaoServiceImpl).obterPorId(Mockito.anyLong());
         doReturn(Optional.of(voto.getAssociado())).when(this.associadoServiceImpl).obterPorCPF(Mockito.anyString());
-        doReturn(true).when(this.userService).consultaCpf(Mockito.anyString());
         assertThrows(SessaoException.class,
                 () -> this.votoServiceImpl.votar(voto.getSessao().getId(), voto.getAssociado().getCpf(), voto.getValor()),
                 "Sessão não está aberta");
@@ -123,7 +121,6 @@ class VotoServiceImplTest {
         doReturn(true).when(this.sessao).isAberta();
         doReturn(voto.getSessao()).when(this.sessaoServiceImpl).obterPorId(Mockito.anyLong());
         doReturn(Optional.of(voto.getAssociado())).when(this.associadoServiceImpl).obterPorCPF(Mockito.anyString());
-        doReturn(true).when(this.userService).consultaCpf(Mockito.anyString());
         doReturn(true).when(this.votoRepository).existsVotoByIdSessaoAndIdAssociado(Mockito.anyLong(),
                 Mockito.anyLong());
         Assertions.assertThrows(ConflictException.class,

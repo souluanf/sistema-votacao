@@ -56,7 +56,7 @@ class PautaControllerTest {
     void verificaCriarPautaSemNome() throws Exception {
         Pauta pautaSalvar = criaPauta();
         pautaSalvar.setNome(null);
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/pautas")
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/v1/pautas")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .accept(MediaType.APPLICATION_JSON_VALUE)
                         .content(JsonUtil.toJson(PautaDTO.from(pautaSalvar))))
@@ -69,7 +69,7 @@ class PautaControllerTest {
     void verificaObterPauta() throws Exception {
         Pauta pautaEsperada = criaPauta();
         when(this.pautaServiceImpl.obterPorId(Mockito.anyLong())).thenReturn(pautaEsperada);
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/pautas/" + 1)
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/v1/pautas/" + 1)
                         .accept(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json(JsonUtil.toJson(PautaDTO.from(pautaEsperada))));
@@ -79,7 +79,7 @@ class PautaControllerTest {
     @DisplayName("Verifica NotFoundException ao obter pauta")
     void verificaNotFoundExceptionObterPauta() throws Exception {
         when(this.pautaServiceImpl.obterPorId(Mockito.anyLong())).thenThrow(new NotFoundException(""));
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/pautas/" + 1)
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/v1/pautas/" + 1)
                         .accept(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isNotFound());
     }
@@ -92,7 +92,7 @@ class PautaControllerTest {
         List<Pauta> listaEsperada = asList(pauta1, pauta2);
         when(this.pautaServiceImpl.obterTodos())
                 .thenReturn(listaEsperada);
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/pautas")
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/v1/pautas")
                         .accept(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json(

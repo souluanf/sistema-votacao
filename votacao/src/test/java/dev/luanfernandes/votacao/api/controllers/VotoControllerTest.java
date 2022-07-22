@@ -78,7 +78,7 @@ class VotoControllerTest {
         Voto votoSalvar = criaVoto();
         when(this.votoServiceImpl.votar(Mockito.anyLong(), Mockito.anyString(), Mockito.anyBoolean()))
                 .thenReturn(votoSalvar);
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/votos")
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/v1/votos")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .accept(MediaType.APPLICATION_JSON_VALUE)
                         .content(JsonUtil.toJson(criaVotoDTO(votoSalvar))))
@@ -92,7 +92,7 @@ class VotoControllerTest {
         votoSalvar.getSessao().setId(null);
         when(this.votoServiceImpl.votar(Mockito.anyLong(), Mockito.anyString(), Mockito.anyBoolean()))
                 .thenReturn(votoSalvar);
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/votos")
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/v1/votos")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .accept(MediaType.APPLICATION_JSON_VALUE)
                         .content(JsonUtil.toJson(criaVotoDTO(votoSalvar))))
@@ -106,7 +106,7 @@ class VotoControllerTest {
         votoSalvar.getAssociado().setCpf(null);
         when(this.votoServiceImpl.votar(Mockito.anyLong(), Mockito.anyString(), Mockito.anyBoolean()))
                 .thenReturn(votoSalvar);
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/votos")
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/v1/votos")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .accept(MediaType.APPLICATION_JSON_VALUE)
                         .content(JsonUtil.toJson(criaVotoDTO(votoSalvar))))
@@ -120,7 +120,7 @@ class VotoControllerTest {
         votoSalvar.setValor(null);
         when(this.votoServiceImpl.votar(Mockito.anyLong(), Mockito.anyString(), Mockito.anyBoolean()))
                 .thenReturn(votoSalvar);
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/votos")
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/v1/votos")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .accept(MediaType.APPLICATION_JSON_VALUE)
                         .content(JsonUtil.toJson(criaVotoDTO(votoSalvar))))
@@ -133,12 +133,10 @@ class VotoControllerTest {
         Voto votoSalvar = criaVoto();
         when(this.votoServiceImpl.votar(Mockito.anyLong(), Mockito.anyString(), Mockito.anyBoolean()))
                 .thenThrow(new NotFoundException(""));
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/votos")
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/v1/votos")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .accept(MediaType.APPLICATION_JSON_VALUE)
                         .content(JsonUtil.toJson(criaVotoDTO(votoSalvar))))
                 .andExpect(status().isNotFound());
     }
-
-
 }

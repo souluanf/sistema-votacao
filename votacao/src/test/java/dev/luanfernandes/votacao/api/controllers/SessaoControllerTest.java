@@ -1,14 +1,13 @@
 package dev.luanfernandes.votacao.api.controllers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import dev.luanfernandes.votacao.api.exceptions.NotFoundException;
 import dev.luanfernandes.votacao.domain.dto.ResultadoSessaoDTO;
 import dev.luanfernandes.votacao.domain.dto.SessaoDTO;
 import dev.luanfernandes.votacao.domain.entity.Pauta;
 import dev.luanfernandes.votacao.domain.entity.ResultadoSessao;
 import dev.luanfernandes.votacao.domain.entity.Sessao;
-import dev.luanfernandes.votacao.infrastructure.implementation.SessaoServiceImpl;
 import dev.luanfernandes.votacao.domain.utils.JsonUtil;
+import dev.luanfernandes.votacao.infrastructure.implementation.SessaoServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -67,7 +66,7 @@ class SessaoControllerTest {
     void verificaCriarSessaoSemIdPauta() throws Exception {
         Sessao sessaoSalvar = criaSessao();
         sessaoSalvar.setPauta(null);
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/sessoes")
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/v1/sessoes")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .accept(MediaType.APPLICATION_JSON_VALUE)
                         .content(JsonUtil.toJson(SessaoDTO.from(sessaoSalvar))))
@@ -79,7 +78,7 @@ class SessaoControllerTest {
     void verificaCriarSessaoSemNome() throws Exception {
         Sessao sessaoSalvar = criaSessao();
         sessaoSalvar.setDescricao(null);
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/sessoes")
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/v1/sessoes")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .accept(MediaType.APPLICATION_JSON_VALUE)
                         .content(JsonUtil.toJson(SessaoDTO.from(sessaoSalvar))))
@@ -91,7 +90,7 @@ class SessaoControllerTest {
     void verificaCriarSessaoSemDataHoraInicio() throws Exception {
         Sessao sessaoSalvar = criaSessao();
         sessaoSalvar.setDataHoraInicio(null);
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/sessoes")
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/v1/sessoes")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .accept(MediaType.APPLICATION_JSON_VALUE)
                         .content(JsonUtil.toJson(SessaoDTO.from(sessaoSalvar))))
@@ -103,7 +102,7 @@ class SessaoControllerTest {
     void verificaNotFoundExceptionCriarSessao() throws Exception {
         Sessao sessaoSalvar = criaSessao();
         when(this.sessaoServiceImpl.abrir(Mockito.any(Sessao.class))).thenThrow(new NotFoundException(""));
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/sessoes")
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/v1/sessoes")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .accept(MediaType.APPLICATION_JSON_VALUE)
                         .content(JsonUtil.toJson(SessaoDTO.from(sessaoSalvar))))
@@ -116,7 +115,7 @@ class SessaoControllerTest {
     void verificaObterSessao() throws Exception {
         Sessao sessaoEsperada = criaSessao();
         when(this.sessaoServiceImpl.obterPorId(Mockito.anyLong())).thenReturn(sessaoEsperada);
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/sessoes/" + 1)
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/v1/sessoes/" + 1)
                         .accept(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json(JsonUtil.toJson(SessaoDTO.from(sessaoEsperada))));
@@ -126,20 +125,20 @@ class SessaoControllerTest {
     @DisplayName("Verifica obter sessao inexistente")
     void verificaObterSessaoInexistente() throws Exception {
         when(this.sessaoServiceImpl.obterPorId(Mockito.anyLong())).thenThrow(new NotFoundException(""));
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/sessoes/" + 1)
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/v1/sessoes/" + 1)
                         .accept(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isNotFound());
     }
 
     @Test
     @DisplayName("Verifica obter todas sessoes")
-    void verificaObterTodosSessoes() throws JsonProcessingException, Exception {
+    void verificaObterTodosSessoes() throws Exception {
         Sessao sessao1 = criaSessao();
         Sessao sessao2 = criaSessaoDois();
         List<Sessao> listaEsperada = asList(sessao1, sessao2);
         when(this.sessaoServiceImpl.obterTodos())
                 .thenReturn(listaEsperada);
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/sessoes")
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/v1/sessoes")
                         .accept(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json(
@@ -151,7 +150,7 @@ class SessaoControllerTest {
     void verificaObterResultadoSessao() throws Exception {
         ResultadoSessao resultadoSessao = new ResultadoSessao(1L, true, 5, 10);
         when(this.sessaoServiceImpl.obterResultadoPorIdSessao(Mockito.anyLong())).thenReturn(resultadoSessao);
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/sessoes/" + 1 + "/resultado")
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/v1/sessoes/" + 1 + "/resultado")
                         .accept(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content()
@@ -162,7 +161,7 @@ class SessaoControllerTest {
     @DisplayName("Verifica NotFoundException ao obter resultado da sessao")
     void verificaNotFoundExceptionObterResultadoSessao() throws Exception {
         when(this.sessaoServiceImpl.obterResultadoPorIdSessao(Mockito.anyLong())).thenThrow(new NotFoundException(""));
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/sessoes/" + 1 + "/resultado")
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/v1/sessoes/" + 1 + "/resultado")
                         .accept(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isNotFound());
     }
