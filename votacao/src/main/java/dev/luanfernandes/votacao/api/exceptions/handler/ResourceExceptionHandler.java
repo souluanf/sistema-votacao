@@ -1,9 +1,6 @@
 package dev.luanfernandes.votacao.api.exceptions.handler;
 
-import dev.luanfernandes.votacao.api.exceptions.ConflictException;
-import dev.luanfernandes.votacao.api.exceptions.ExternalApiException;
-import dev.luanfernandes.votacao.api.exceptions.NotFoundException;
-import dev.luanfernandes.votacao.api.exceptions.ValidationException;
+import dev.luanfernandes.votacao.api.exceptions.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
