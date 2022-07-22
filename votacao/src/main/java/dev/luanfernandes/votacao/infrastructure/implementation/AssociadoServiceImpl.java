@@ -2,9 +2,11 @@ package dev.luanfernandes.votacao.infrastructure.implementation;
 
 import dev.luanfernandes.votacao.api.exceptions.ConflictException;
 import dev.luanfernandes.votacao.api.exceptions.NotFoundException;
+import dev.luanfernandes.votacao.api.exceptions.ValidationException;
 import dev.luanfernandes.votacao.domain.entity.Associado;
 import dev.luanfernandes.votacao.domain.service.AssociadoService;
-import dev.luanfernandes.votacao.domain.service.UserService;
+import dev.luanfernandes.votacao.domain.service.UserInfoService;
+import dev.luanfernandes.votacao.domain.utils.DocumentValidator;
 import dev.luanfernandes.votacao.domain.utils.StringUtil;
 import dev.luanfernandes.votacao.infrastructure.repository.AssociadoRepository;
 import lombok.AllArgsConstructor;
@@ -17,17 +19,19 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class AssociadoServiceImpl implements AssociadoService {
-	private UserService userService;
+	private UserInfoService userInfoService;
 	private AssociadoRepository repository;
 
 	@Override
 	public Associado criar(Associado associado) {
-		userService.consultaCpf(StringUtil.removeMask(associado.getCpf()));
+		associado.setCpf(StringUtil.removeMask(associado.getCpf()));
+		if (!DocumentValidator.isValidCpf(associado.getCpf())){
+			throw new ValidationException("Cpf inválido");
+		}
 		Optional<Associado> associadoCadastrado = this.repository.findByCpf(associado.getCpf());
 		if (associadoCadastrado.isPresent()) {
 			throw new ConflictException("CPF já cadastrado");
 		}
-		associado.setCpf(StringUtil.removeMask(associado.getCpf()));
 		return this.repository.save(associado);
 	}
 
@@ -52,7 +56,11 @@ public class AssociadoServiceImpl implements AssociadoService {
 
 	@Override
 	public Optional<Associado> obterPorCPF(String cpf) {
-		return this.repository.findByCpf(StringUtil.removeMask(cpf));
+		cpf = StringUtil.removeMask(cpf);
+		if (!DocumentValidator.isValidCpf(cpf)){
+			throw new ValidationException("Cpf inválido");
+		}
+		return this.repository.findByCpf(cpf);
 	}
 
 	@Override

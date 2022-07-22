@@ -11,7 +11,7 @@ import lombok.*;
 @NoArgsConstructor
 @Data
 @ApiModel(value = "CPF",description = "Representa retorno da consulta")
-public class ApiDto {
+public class UserInfoDto {
 
     @ApiModelProperty(example = "ABLE_TO_VOTE")
     String status;

@@ -7,7 +7,7 @@ import dev.luanfernandes.votacao.api.exceptions.SessaoException;
 import dev.luanfernandes.votacao.domain.entity.Associado;
 import dev.luanfernandes.votacao.domain.entity.Sessao;
 import dev.luanfernandes.votacao.domain.entity.Voto;
-import dev.luanfernandes.votacao.domain.service.UserService;
+import dev.luanfernandes.votacao.domain.service.UserInfoService;
 import dev.luanfernandes.votacao.infrastructure.repository.VotoRepository;
 import org.apache.commons.lang3.SerializationUtils;
 import org.junit.jupiter.api.Assertions;
@@ -35,7 +35,7 @@ class VotoServiceImplTest {
     @Mock
     private AssociadoServiceImpl associadoServiceImpl;
     @Mock
-    private UserService userService;
+    private UserInfoService userInfoService;
     @Mock
     private Sessao sessao;
     @InjectMocks

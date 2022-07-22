@@ -26,7 +26,7 @@ public class KafkaQueueServiceImpl implements KafkaQueueService {
     @EventListener
     @Override
     public void votacaoEncerradaListener(VotacaoEncerradaEvent event) {
-        log.info("Votação {} encerrada. Notificando demais sistemas.", event.getSessaoVotacao());
+        log.info("Votação: {}.", event.getSessaoVotacao());
         send(event.getSessaoVotacao());
     }
 

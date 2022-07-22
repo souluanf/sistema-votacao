@@ -14,10 +14,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class SessaoVotacao extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -7940036382932919879L;
+  private static final long serialVersionUID = -583798448463541114L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"SessaoVotacao\",\"namespace\":\"dev.luanfernandes.consumer.record\",\"fields\":[{\"name\":\"pauta\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"sessao\",\"type\":\"long\"},{\"name\":\"horaInicio\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"horaFim\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"votoSim\",\"type\":\"int\"},{\"name\":\"votoNao\",\"type\":\"int\"}],\"version\":\"1\"}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"SessaoVotacao\",\"namespace\":\"dev.luanfernandes.consumer.record\",\"fields\":[{\"name\":\"pauta\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"sessao\",\"type\":\"long\"},{\"name\":\"horaInicio\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"horaFim\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"votoSim\",\"type\":\"int\"},{\"name\":\"votoNao\",\"type\":\"int\"},{\"name\":\"aberta\",\"type\":\"boolean\"}],\"version\":\"1\"}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -79,6 +79,7 @@ public class SessaoVotacao extends org.apache.avro.specific.SpecificRecordBase i
   private java.lang.String horaFim;
   private int votoSim;
   private int votoNao;
+  private boolean aberta;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -95,14 +96,16 @@ public class SessaoVotacao extends org.apache.avro.specific.SpecificRecordBase i
    * @param horaFim The new value for horaFim
    * @param votoSim The new value for votoSim
    * @param votoNao The new value for votoNao
+   * @param aberta The new value for aberta
    */
-  public SessaoVotacao(java.lang.String pauta, java.lang.Long sessao, java.lang.String horaInicio, java.lang.String horaFim, java.lang.Integer votoSim, java.lang.Integer votoNao) {
+  public SessaoVotacao(java.lang.String pauta, java.lang.Long sessao, java.lang.String horaInicio, java.lang.String horaFim, java.lang.Integer votoSim, java.lang.Integer votoNao, java.lang.Boolean aberta) {
     this.pauta = pauta;
     this.sessao = sessao;
     this.horaInicio = horaInicio;
     this.horaFim = horaFim;
     this.votoSim = votoSim;
     this.votoNao = votoNao;
+    this.aberta = aberta;
   }
 
   public org.apache.avro.specific.SpecificData getSpecificData() { return MODEL$; }
@@ -116,6 +119,7 @@ public class SessaoVotacao extends org.apache.avro.specific.SpecificRecordBase i
     case 3: return horaFim;
     case 4: return votoSim;
     case 5: return votoNao;
+    case 6: return aberta;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -130,6 +134,7 @@ public class SessaoVotacao extends org.apache.avro.specific.SpecificRecordBase i
     case 3: horaFim = value$ != null ? value$.toString() : null; break;
     case 4: votoSim = (java.lang.Integer)value$; break;
     case 5: votoNao = (java.lang.Integer)value$; break;
+    case 6: aberta = (java.lang.Boolean)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -195,6 +200,16 @@ public class SessaoVotacao extends org.apache.avro.specific.SpecificRecordBase i
 
 
   /**
+   * Gets the value of the 'aberta' field.
+   * @return The value of the 'aberta' field.
+   */
+  public boolean getAberta() {
+    return aberta;
+  }
+
+
+
+  /**
    * Creates a new SessaoVotacao RecordBuilder.
    * @return A new SessaoVotacao RecordBuilder
    */
@@ -241,6 +256,7 @@ public class SessaoVotacao extends org.apache.avro.specific.SpecificRecordBase i
     private java.lang.String horaFim;
     private int votoSim;
     private int votoNao;
+    private boolean aberta;
 
     /** Creates a new Builder */
     private Builder() {
@@ -277,6 +293,10 @@ public class SessaoVotacao extends org.apache.avro.specific.SpecificRecordBase i
         this.votoNao = data().deepCopy(fields()[5].schema(), other.votoNao);
         fieldSetFlags()[5] = other.fieldSetFlags()[5];
       }
+      if (isValidValue(fields()[6], other.aberta)) {
+        this.aberta = data().deepCopy(fields()[6].schema(), other.aberta);
+        fieldSetFlags()[6] = other.fieldSetFlags()[6];
+      }
     }
 
     /**
@@ -308,6 +328,10 @@ public class SessaoVotacao extends org.apache.avro.specific.SpecificRecordBase i
       if (isValidValue(fields()[5], other.votoNao)) {
         this.votoNao = data().deepCopy(fields()[5].schema(), other.votoNao);
         fieldSetFlags()[5] = true;
+      }
+      if (isValidValue(fields()[6], other.aberta)) {
+        this.aberta = data().deepCopy(fields()[6].schema(), other.aberta);
+        fieldSetFlags()[6] = true;
       }
     }
 
@@ -548,6 +572,45 @@ public class SessaoVotacao extends org.apache.avro.specific.SpecificRecordBase i
       return this;
     }
 
+    /**
+      * Gets the value of the 'aberta' field.
+      * @return The value.
+      */
+    public boolean getAberta() {
+      return aberta;
+    }
+
+
+    /**
+      * Sets the value of the 'aberta' field.
+      * @param value The value of 'aberta'.
+      * @return This builder.
+      */
+    public dev.luanfernandes.consumer.record$.SessaoVotacao.Builder setAberta(boolean value) {
+      validate(fields()[6], value);
+      this.aberta = value;
+      fieldSetFlags()[6] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'aberta' field has been set.
+      * @return True if the 'aberta' field has been set, false otherwise.
+      */
+    public boolean hasAberta() {
+      return fieldSetFlags()[6];
+    }
+
+
+    /**
+      * Clears the value of the 'aberta' field.
+      * @return This builder.
+      */
+    public dev.luanfernandes.consumer.record$.SessaoVotacao.Builder clearAberta() {
+      fieldSetFlags()[6] = false;
+      return this;
+    }
+
     @Override
     @SuppressWarnings("unchecked")
     public SessaoVotacao build() {
@@ -559,6 +622,7 @@ public class SessaoVotacao extends org.apache.avro.specific.SpecificRecordBase i
         record.horaFim = fieldSetFlags()[3] ? this.horaFim : (java.lang.String) defaultValue(fields()[3]);
         record.votoSim = fieldSetFlags()[4] ? this.votoSim : (java.lang.Integer) defaultValue(fields()[4]);
         record.votoNao = fieldSetFlags()[5] ? this.votoNao : (java.lang.Integer) defaultValue(fields()[5]);
+        record.aberta = fieldSetFlags()[6] ? this.aberta : (java.lang.Boolean) defaultValue(fields()[6]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -603,6 +667,8 @@ public class SessaoVotacao extends org.apache.avro.specific.SpecificRecordBase i
 
     out.writeInt(this.votoNao);
 
+    out.writeBoolean(this.aberta);
+
   }
 
   @Override public void customDecode(org.apache.avro.io.ResolvingDecoder in)
@@ -622,8 +688,10 @@ public class SessaoVotacao extends org.apache.avro.specific.SpecificRecordBase i
 
       this.votoNao = in.readInt();
 
+      this.aberta = in.readBoolean();
+
     } else {
-      for (int i = 0; i < 6; i++) {
+      for (int i = 0; i < 7; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
           this.pauta = in.readString();
@@ -647,6 +715,10 @@ public class SessaoVotacao extends org.apache.avro.specific.SpecificRecordBase i
 
         case 5:
           this.votoNao = in.readInt();
+          break;
+
+        case 6:
+          this.aberta = in.readBoolean();
           break;
 
         default:

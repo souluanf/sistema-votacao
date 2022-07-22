@@ -16,6 +16,6 @@ public class ConsumerImpl implements Consumer {
     @Override
     public void consume(ConsumerRecord<String, SessaoVotacao> rec) {
         log.info("Consumed message -> {} | topic {}, partition {}", rec.value(),rec.topic(),rec.partition());
-        log.info("data {}",rec.value());
+        log.info("data: {}",rec.value());
     }
 }

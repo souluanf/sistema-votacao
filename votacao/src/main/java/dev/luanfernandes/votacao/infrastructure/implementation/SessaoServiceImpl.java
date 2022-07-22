@@ -69,8 +69,6 @@ public class SessaoServiceImpl implements SessaoService {
 	public ResultadoSessao obterResultadoPorIdSessao(Long idSessao) throws NotFoundException {
 		Sessao sessao = this.sessaoRepository.findById(idSessao)
 				.orElseThrow(() -> new NotFoundException("Sessão inexistente"));
-
-
 		List<Object[]> resultado = this.sessaoRepository.obterResultadoPorIdSessao(idSessao);
 		Integer totalSim = Optional.ofNullable(resultado.get(0)[0]).map(i -> Integer.valueOf(i.toString())).orElse(0);
 		Integer totalNao = Optional.ofNullable(resultado.get(0)[1]).map(i -> Integer.valueOf(i.toString())).orElse(0);
@@ -87,6 +85,7 @@ public class SessaoServiceImpl implements SessaoService {
 				.setHoraFim(String.valueOf(sessao.getDataHoraFechamento().toInstant().getEpochSecond()))
 				.setVotoSim(resultadoSessao.getTotalSim())
 				.setVotoNao(resultadoSessao.getTotalNao())
+				.setAberta(sessao.isAberta())
 				.build();
 		publisherService.sessaoFinalizada(sessaoVotacao);
 	}

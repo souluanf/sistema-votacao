@@ -1,6 +1,6 @@
 package dev.luanfernandes.votacao.domain.service;
 
 
-public interface UserService {
+public interface UserInfoService {
     void enableToVote(String cpf);
 }
