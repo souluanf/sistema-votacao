@@ -17,7 +17,7 @@
         <java.version>17</java.version>
         <kafka-avro-serializer.version>7.2.0</kafka-avro-serializer.version>
         <kafka-clients.version>3.1.1</kafka-clients.version>
-        <avro.version>1.11.0</avro.version>
+        <avro.version>1.11.3</avro.version>
     </properties>
 
     <repositories>
